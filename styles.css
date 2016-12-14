@@ -64,16 +64,16 @@ body {
     text-align: center;
 }
 
-#breakWord {
-    font-size: 3em;
+#breakWord, #workWord {
+    font-size: 2em;
 }
 
-#breakTime {
+#breakTime, #workTime {
     margin-top: 20px;
     font-size: 3em;
 }
 
-#breakTime span {
+#breakTime span, #workTime span {
     padding: 0 50px;
 }
 /*************************************/
@@ -98,4 +98,9 @@ body {
   font-size: 10em;
   /*background-color: silver;*/
   cursor: pointer;
+}
+/*************************************/
+
+#workBox {
+    text-align: center;
 }
