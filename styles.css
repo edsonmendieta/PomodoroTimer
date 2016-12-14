@@ -20,7 +20,7 @@ line-height: 1;
 }
 
 h1, h2, h3, h4, h5, h6 {
-padding: .6em 0;
+padding: 0;
 margin: 0 0;
 }
 
@@ -58,9 +58,30 @@ body {
   background-color: skyblue;
 }
 
+/*************************************/
+#breakBox {
+    margin-top: 175px;
+    text-align: center;
+}
+
+#breakWord {
+    font-size: 3em;
+}
+
+#breakTime {
+    margin-top: 20px;
+    font-size: 3em;
+}
+
+#breakTime span {
+    padding: 0 50px;
+}
+/*************************************/
 
 #clockBox {
   width: 100%;
+  margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: center;
 }
@@ -69,12 +90,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 100px;
-  width: 250px;
-  height: 250px;
-  border: solid green 3px;
+  margin-top: 50px;
+  width: 350px;
+  height: 200px;
+  /*border: solid green 3px;*/
   border-radius: 250px;
-  font-size: 5em;
-  background-color: silver;
+  font-size: 10em;
+  /*background-color: silver;*/
   cursor: pointer;
 }
