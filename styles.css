@@ -1,0 +1,80 @@
+/******************************************\
+                $Imported Fonts
+\******************************************/
+
+
+
+/******************************************\
+                $CSS Reset
+\******************************************/
+
+/* basic elements */
+body, html, section, div, blockquote, img, label, p, h1, h2, h3, h4, h5, h6, pre, ul, ol,
+li, dl, dt, dd, form, a, fieldset, th, td
+{
+margin: 0; padding: 0; border: 0; outline: none;
+}
+
+body {
+line-height: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+padding: .6em 0;
+margin: 0 0;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+
+ul, ol {
+list-style: none;
+}
+
+a {
+color: green;
+text-decoration: none;
+}
+
+a:hover {
+text-decoration: none;
+color: #EBB000;
+}
+
+/******************************************\
+                $Main
+\******************************************/
+
+html {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  background-color: skyblue;
+}
+
+
+#clockBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#clock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  width: 250px;
+  height: 250px;
+  border: solid green 3px;
+  border-radius: 250px;
+  font-size: 5em;
+  background-color: silver;
+  cursor: pointer;
+}
