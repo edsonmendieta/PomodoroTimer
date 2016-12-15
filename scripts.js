@@ -95,6 +95,11 @@ function secDown() {
 
 clock.addEventListener('click', function(){
 
+    if (document.getElementsByClassName('active').length === 0) {
+
+        workNum.className = 'active';
+    }
+
     if (clock.className == 'paused') {
 
         clock.className = 'running'
@@ -153,7 +158,7 @@ plus1.addEventListener('click', function(){
 
 minus2.addEventListener('click', function(){
 
-    if (clock.className == 'paused') {
+    if (clock.className == 'paused' && workT > 1) {
 
         // removes colon from clock display if present
         if (colon.childNodes[0] !== undefined) {
@@ -180,9 +185,13 @@ minus2.addEventListener('click', function(){
         //------------------------------------------
 
         var clockText = document.createTextNode(minutes);
-        one.removeChild(one.childNodes[0]);
-        one.appendChild(clockText);
-    }
+
+        if (document.getElementsByClassName('active').length === 0 || workNum.className == 'active') {
+
+            one.removeChild(one.childNodes[0]);
+            one.appendChild(clockText);
+        }
+    } // ENDS 1st 'IF'
 
 });
 
@@ -219,8 +228,12 @@ plus2.addEventListener('click', function(){
         //------------------------------------------
 
         var clockText = document.createTextNode(workT);
-        one.removeChild(one.childNodes[0]);
-        one.appendChild(clockText);
+
+        if (document.getElementsByClassName('active').length === 0 || workNum.className == 'active') {
+
+            one.removeChild(one.childNodes[0]);
+            one.appendChild(clockText);
+        }
 
     } // ENDS 1st 'IF'
 

@@ -58,6 +58,12 @@ body {
   background-color: skyblue;
 }
 
+/**********DYNAMIC********************/
+
+.active {
+    color: white;
+}
+
 /*********SHARED**********************/
 
 #breakWord, #workWord {
