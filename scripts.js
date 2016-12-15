@@ -38,52 +38,56 @@ var seconds = 59;
 
 function secDown() {
 
-    console.log('EXECUTED');
-    //------------------------------------------------------
-    if (seconds == 59 && minutes > 0) {
-      //Seconds at 59 means full min. has passed,
-      // thus, min. is decreased by 1.
-        minutes -= 1;
-        var min = document.createTextNode(minutes);
-        one.removeChild(one.childNodes[0]);
-        one.appendChild(min);
-    }
-    //-------------------------------------------------------
-    var secNode; // Current second
+    if (clock.className == 'running') {
 
-    if (seconds < 10) {
-      // adds a 0 in front of single-digit numbers
-      secNode = document.createTextNode('0' + seconds);
-    }
-
-    else {
-
-      secNode = document.createTextNode(seconds);
-    }
-
-    if(two.childNodes[0]) {
-        // if seconds slot is NOT empty...
-        two.removeChild(two.childNodes[0]);
-    }
-    two.appendChild(secNode);
-    seconds -= 1;
-    //-------------------------------------------------------
-
-    // Run function again with 1 sec. delay if conditions met:
-    if (seconds >= 0 && minutes >= 0) {
-
-        setTimeout(secDown, 1000);
-    }
-
-  // Reset seconds if they display '00' and run function
-  // if also other conditions met.
-  if (seconds === -1 && minutes > 0) {
-
-          seconds = 59;
-          setTimeout(secDown, 1000);
+        console.log('EXECUTED');
+        //------------------------------------------------------
+        if (seconds == 59 && minutes > 0) {
+          //Seconds at 59 means full min. has passed,
+          // thus, min. is decreased by 1.
+            minutes -= 1;
+            var min = document.createTextNode(minutes);
+            one.removeChild(one.childNodes[0]);
+            one.appendChild(min);
+        }
+        //-------------------------------------------------------
+        var secNode; // Current second
+        //---------------------------------------------------
+        if (seconds < 10) {
+          // adds a 0 in front of single-digit numbers
+          secNode = document.createTextNode('0' + seconds);
         }
 
-}
+        else {
+
+          secNode = document.createTextNode(seconds);
+        }
+        //----------------------------------------------------
+        if(two.childNodes[0]) {
+            // if seconds slot is NOT empty...
+            two.removeChild(two.childNodes[0]);
+        }
+        two.appendChild(secNode);
+        seconds -= 1;
+        //-------------------------------------------------------
+
+        // Run function again with 1 sec. delay if conditions met:
+        if (seconds >= 0 && minutes >= 0) {
+
+            setTimeout(secDown, 1000);
+        }
+
+      // Reset seconds if they display '00' and run function
+      // if also other conditions met.
+        if (seconds === -1 && minutes > 0) {
+
+            seconds = 59;
+            setTimeout(secDown, 1000);
+        }
+
+    } // ENDS 1st 'IF'
+
+} // ENDS SECDOWN
 
 // --------------------------------------------------------------
 
@@ -91,20 +95,23 @@ function secDown() {
 
 clock.addEventListener('click', function(){
 
-    // one.removeChild(one.childNodes[0]);
-    // one.appendChild(workNum.childNodes[0]);
+    if (clock.className == 'paused') {
 
-    // Adds colon to timer if not already on it at click
-    if (colon.childNodes[0] == undefined) {
+        clock.className = 'running'
 
-        colon.appendChild(colText);
+        // Adds colon to timer if not already on it at click
+        if (colon.childNodes[0] == undefined) {
+
+            colon.appendChild(colText);
+        }
+
+        secDown();
     }
 
-    secDown();
+    else {
 
-    // var min = document.createTextNode(minutes);
-    // one.removeChild(one.childNodes[0]);
-    // one.appendChild(min);
+        clock.className = 'paused';
+    }
 
 });
 
@@ -146,10 +153,26 @@ plus1.addEventListener('click', function(){
 
 minus2.addEventListener('click', function(){
 
-    if (workT > 1) {
+    if (clock.className == 'paused') {
+
+        // removes colon from clock display if present
+        if (colon.childNodes[0] !== undefined) {
+
+            colon.removeChild(colon.childNodes[0]);
+        }
+
+        // removes seconds from clock display if present
+        if (two.childNodes[0] !== undefined) {
+
+            two.removeChild(two.childNodes[0]);
+        }
+
+        seconds = 59;
 
         workT -= 1;
-        minutes -= 1;
+
+        // used by 'secDown' function
+        minutes = workT;
 
         var workText = document.createTextNode(workT);
         workNum.removeChild(workNum.childNodes[0]);
@@ -169,10 +192,26 @@ minus2.addEventListener('click', function(){
 
 plus2.addEventListener('click', function(){
 
-    if (workT >= 1) {
+    if (clock.className == 'paused') {
+
+        // removes colon from clock display if present
+        if (colon.childNodes[0] !== undefined) {
+
+            colon.removeChild(colon.childNodes[0]);
+        }
+
+        // removes seconds from clock display if present
+        if (two.childNodes[0] !== undefined) {
+
+            two.removeChild(two.childNodes[0]);
+        }
+
+        seconds = 59;
 
         workT += 1;
-        minutes += 1;
+
+        // used by 'secDown' function
+        minutes = workT;
 
         var workText = document.createTextNode(workT);
         workNum.removeChild(workNum.childNodes[0]);
@@ -182,7 +221,8 @@ plus2.addEventListener('click', function(){
         var clockText = document.createTextNode(workT);
         one.removeChild(one.childNodes[0]);
         one.appendChild(clockText);
-    }
+
+    } // ENDS 1st 'IF'
 
 });
 
