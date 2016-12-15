@@ -1,10 +1,34 @@
-// GLOBALS ---------------------------------------------------------
+// GLOBALS ------------------------------------------
+var minus1 = document.getElementById('minus1');
+
+var breakNum = document.getElementById('breakNum');
+
+var plus1 = document.getElementById('plus1');
+//---------------------------------------------------
+
+var minus2 = document.getElementById('minus2');
+
+var workNum = document.getElementById('workNum');
+
+var plus2 = document.getElementById('plus2');
+//---------------------------------------------------
+
+var clock = document.getElementById('clock');
 
 var one = document.getElementById('part1');
 
-var two = document.getElementById('part2');
+var colon = document.getElementById('colon');
 
-var minutes = 2;
+var colText = document.createTextNode(':');
+
+var two = document.getElementById('part2');
+//----------------------------------------------------
+
+var breakT = 5;
+
+var workT = 25;
+//-------------
+var minutes = 25;
 
 var seconds = 59;
 
@@ -37,7 +61,10 @@ function secDown() {
       secNode = document.createTextNode(seconds);
     }
 
-    two.removeChild(two.childNodes[0]);
+    if(two.childNodes[0]) {
+        // if seconds slot is NOT empty...
+        two.removeChild(two.childNodes[0]);
+    }
     two.appendChild(secNode);
     seconds -= 1;
     //-------------------------------------------------------
@@ -60,15 +87,102 @@ function secDown() {
 
 // --------------------------------------------------------------
 
-// ON TIMER CLICK--------------------------------------------
+// ON TIME-CLICK--------------------------------------------
 
 clock.addEventListener('click', function(){
+
+    // one.removeChild(one.childNodes[0]);
+    // one.appendChild(workNum.childNodes[0]);
+
+    // Adds colon to timer if not already on it at click
+    if (colon.childNodes[0] == undefined) {
+
+        colon.appendChild(colText);
+    }
 
     secDown();
 
     // var min = document.createTextNode(minutes);
     // one.removeChild(one.childNodes[0]);
     // one.appendChild(min);
+
+});
+
+//-----------------------------------------------------------------
+
+// 1st MINUS--------------------------------------------
+
+minus1.addEventListener('click', function(){
+
+    if (breakT > 1) {
+
+        breakT -= 1;
+        var breakText = document.createTextNode(breakT);
+        breakNum.removeChild(breakNum.childNodes[0]);
+        breakNum.appendChild(breakText);
+    }
+
+});
+
+//-----------------------------------------------------------------
+
+// 1st PLUS--------------------------------------------
+
+plus1.addEventListener('click', function(){
+
+    if (breakT >= 1) {
+
+        breakT += 1;
+        var breakText = document.createTextNode(breakT);
+        breakNum.removeChild(breakNum.childNodes[0]);
+        breakNum.appendChild(breakText);
+    }
+
+});
+
+//-----------------------------------------------------------------
+
+// 2nd MINUS--------------------------------------------
+
+minus2.addEventListener('click', function(){
+
+    if (workT > 1) {
+
+        workT -= 1;
+        minutes -= 1;
+
+        var workText = document.createTextNode(workT);
+        workNum.removeChild(workNum.childNodes[0]);
+        workNum.appendChild(workText);
+        //------------------------------------------
+
+        var clockText = document.createTextNode(minutes);
+        one.removeChild(one.childNodes[0]);
+        one.appendChild(clockText);
+    }
+
+});
+
+//-----------------------------------------------------------------
+
+// 2nd PLUS--------------------------------------------
+
+plus2.addEventListener('click', function(){
+
+    if (workT >= 1) {
+
+        workT += 1;
+        minutes += 1;
+
+        var workText = document.createTextNode(workT);
+        workNum.removeChild(workNum.childNodes[0]);
+        workNum.appendChild(workText);
+        //------------------------------------------
+
+        var clockText = document.createTextNode(workT);
+        one.removeChild(one.childNodes[0]);
+        one.appendChild(clockText);
+    }
 
 });
 

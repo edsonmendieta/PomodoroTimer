@@ -58,30 +58,39 @@ body {
   background-color: skyblue;
 }
 
-/*************************************/
-#breakBox {
-    margin-top: 175px;
-    text-align: center;
-}
+/*********SHARED**********************/
 
 #breakWord, #workWord {
     font-size: 2em;
 }
 
 #breakTime, #workTime {
-    margin-top: 20px;
+    margin-top: 40px;
     font-size: 3em;
 }
 
-#breakTime span, #workTime span {
+#breakNum, #workNum {
     padding: 0 50px;
+}
+
+#minus1, #minus2, #plus1, #plus2 {
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select:none;
+    -ms-user-select: none;
 }
 /*************************************/
 
+#breakBox {
+    margin-top: 175px;
+    text-align: center;
+}
+/************************************/
+
 #clockBox {
   width: 100%;
-  margin-top: 50px;
-  margin-bottom: 50px;
+  margin-top: 30px;
+  margin-bottom: 30px;
   display: flex;
   justify-content: center;
 }
@@ -91,6 +100,7 @@ body {
   justify-content: center;
   align-items: center;
   margin-top: 50px;
+  margin-bottom: 50px;
   width: 350px;
   height: 200px;
   /*border: solid green 3px;*/
