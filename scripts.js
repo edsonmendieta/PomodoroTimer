@@ -85,6 +85,30 @@ function secDown() {
             setTimeout(secDown, 1000);
         }
 
+        // When clock-working reaches '0:00' do this:
+        if (workNum.className == 'active' && (seconds == -1 && minutes == 0)) {
+
+            minutes = breakT;
+            seconds = 59;
+
+            workNum.className = 'dormant';
+            breakNum.className = 'active';
+
+            setTimeout(secDown, 1000);
+        }
+
+        // When clock-break reaches '0:00' do this:
+        if (breakNum.className == 'active' && (seconds == -1 && minutes == 0)) {
+
+            minutes = workT;
+            seconds = 59;
+
+            breakNum.className = 'dormant';
+            workNum.className = 'active';
+
+            setTimeout(secDown, 1000);
+        }
+
     } // ENDS 1st 'IF'
 
 } // ENDS SECDOWN
@@ -95,13 +119,17 @@ function secDown() {
 
 clock.addEventListener('click', function(){
 
+    // if clock has NOT been clicked yet
     if (document.getElementsByClassName('active').length === 0) {
 
         workNum.className = 'active';
+        minutes = workT;
     }
 
+    // if clock is PAUSED
     if (clock.className == 'paused') {
 
+        // ADDS 'running' to clock & ALLOWS for 'secDown' execution
         clock.className = 'running'
 
         // Adds colon to timer if not already on it at click
@@ -110,9 +138,11 @@ clock.addEventListener('click', function(){
             colon.appendChild(colText);
         }
 
+        // EXECUTES 'secDown'
         secDown();
     }
 
+    // if clock IS RUNNING at time of click
     else {
 
         clock.className = 'paused';
@@ -126,67 +156,42 @@ clock.addEventListener('click', function(){
 
 minus1.addEventListener('click', function(){
 
-    if (breakT > 1) {
-
-        breakT -= 1;
-        var breakText = document.createTextNode(breakT);
-        breakNum.removeChild(breakNum.childNodes[0]);
-        breakNum.appendChild(breakText);
-    }
-
-});
-
-//-----------------------------------------------------------------
-
-// 1st PLUS--------------------------------------------
-
-plus1.addEventListener('click', function(){
-
-    if (breakT >= 1) {
-
-        breakT += 1;
-        var breakText = document.createTextNode(breakT);
-        breakNum.removeChild(breakNum.childNodes[0]);
-        breakNum.appendChild(breakText);
-    }
-
-});
-
-//-----------------------------------------------------------------
-
-// 2nd MINUS--------------------------------------------
-
-minus2.addEventListener('click', function(){
-
-    if (clock.className == 'paused' && workT > 1) {
+    if ((clock.className == 'paused' || breakNum.className == 'dormant') && breakT > 1) {
 
         // removes colon from clock display if present
-        if (colon.childNodes[0] !== undefined) {
+        if (breakNum.className == 'active' && colon.childNodes[0] !== undefined) {
 
             colon.removeChild(colon.childNodes[0]);
         }
 
         // removes seconds from clock display if present
-        if (two.childNodes[0] !== undefined) {
+        if (breakNum.className == 'active' && two.childNodes[0] !== undefined) {
 
             two.removeChild(two.childNodes[0]);
         }
 
-        seconds = 59;
+        // if clock-break is running
+        if (breakNum.className == 'active') {
 
-        workT -= 1;
+            seconds = 59;
+        }
+
+        breakT -= 1;
 
         // used by 'secDown' function
-        minutes = workT;
+        if (breakNum.className == 'active') {
 
-        var workText = document.createTextNode(workT);
-        workNum.removeChild(workNum.childNodes[0]);
-        workNum.appendChild(workText);
+            minutes = breakT;
+        }
+
+        var breakText = document.createTextNode(breakT);
+        breakNum.removeChild(breakNum.childNodes[0]);
+        breakNum.appendChild(breakText);
         //------------------------------------------
 
-        var clockText = document.createTextNode(minutes);
+        var clockText = document.createTextNode(breakT);
 
-        if (document.getElementsByClassName('active').length === 0 || workNum.className == 'active') {
+        if (breakNum.className == 'active') {
 
             one.removeChild(one.childNodes[0]);
             one.appendChild(clockText);
@@ -197,30 +202,87 @@ minus2.addEventListener('click', function(){
 
 //-----------------------------------------------------------------
 
-// 2nd PLUS--------------------------------------------
+// 1st PLUS--------------------------------------------
 
-plus2.addEventListener('click', function(){
+plus1.addEventListener('click', function(){
 
-    if (clock.className == 'paused') {
+    if (clock.className == 'paused' || breakNum.className == 'dormant') {
 
         // removes colon from clock display if present
-        if (colon.childNodes[0] !== undefined) {
+        if (breakNum.className == 'active' && colon.childNodes[0] !== undefined) {
 
             colon.removeChild(colon.childNodes[0]);
         }
 
         // removes seconds from clock display if present
-        if (two.childNodes[0] !== undefined) {
+        if (breakNum.className == 'active' && two.childNodes[0] !== undefined) {
 
             two.removeChild(two.childNodes[0]);
         }
 
-        seconds = 59;
+        // if clock-break is running
+        if (breakNum.className == 'active') {
 
-        workT += 1;
+            seconds = 59;
+        }
+
+        breakT += 1;
 
         // used by 'secDown' function
-        minutes = workT;
+        if (breakNum.className == 'active') {
+
+            minutes = breakT;
+        }
+
+        var breakText = document.createTextNode(breakT);
+        breakNum.removeChild(breakNum.childNodes[0]);
+        breakNum.appendChild(breakText);
+        //------------------------------------------
+
+        var clockText = document.createTextNode(breakT);
+
+        if (breakNum.className == 'active') {
+
+            one.removeChild(one.childNodes[0]);
+            one.appendChild(clockText);
+        }
+    } // ENDS 1st 'IF'
+
+});
+
+//-----------------------------------------------------------------
+
+// 2nd MINUS--------------------------------------------
+
+minus2.addEventListener('click', function(){
+
+    if ((clock.className == 'paused' || workNum.className == 'dormant') && workT > 1) {
+
+        // removes colon from clock display if present
+        if (workNum.className == 'active' && colon.childNodes[0] !== undefined) {
+
+            colon.removeChild(colon.childNodes[0]);
+        }
+
+        // removes seconds from clock display if present
+        if (workNum.className == 'active' && two.childNodes[0] !== undefined) {
+
+            two.removeChild(two.childNodes[0]);
+        }
+
+        // if clock-break is running
+        if (workNum.className == 'active') {
+
+            seconds = 59;
+        }
+
+        workT -= 1;
+
+        // used by 'secDown' function
+        if (workNum.className == 'active') {
+
+            minutes = workT;
+        }
 
         var workText = document.createTextNode(workT);
         workNum.removeChild(workNum.childNodes[0]);
@@ -229,12 +291,60 @@ plus2.addEventListener('click', function(){
 
         var clockText = document.createTextNode(workT);
 
-        if (document.getElementsByClassName('active').length === 0 || workNum.className == 'active') {
+        if (workNum.className == 'active' || document.getElementsByClassName('active').length === 0) {
 
             one.removeChild(one.childNodes[0]);
             one.appendChild(clockText);
         }
+    } // ENDS 1st 'IF'
+});
 
+//-----------------------------------------------------------------
+
+// 2nd PLUS--------------------------------------------
+
+plus2.addEventListener('click', function(){
+
+    if (clock.className == 'paused' || workNum.className == 'dormant') {
+
+        // removes colon from clock display if present
+        if (workNum.className == 'active' && colon.childNodes[0] !== undefined) {
+
+            colon.removeChild(colon.childNodes[0]);
+        }
+
+        // removes seconds from clock display if present
+        if (workNum.className == 'active' && two.childNodes[0] !== undefined) {
+
+            two.removeChild(two.childNodes[0]);
+        }
+
+        // if clock-break is running
+        if (workNum.className == 'active') {
+
+            seconds = 59;
+        }
+
+        workT += 1;
+
+        // used by 'secDown' function
+        if (workNum.className == 'active') {
+
+            minutes = workT;
+        }
+
+        var workText = document.createTextNode(workT);
+        workNum.removeChild(workNum.childNodes[0]);
+        workNum.appendChild(workText);
+        //------------------------------------------
+
+        var clockText = document.createTextNode(workT);
+
+        if (workNum.className == 'active' || document.getElementsByClassName('active').length === 0) {
+
+            one.removeChild(one.childNodes[0]);
+            one.appendChild(clockText);
+        }
     } // ENDS 1st 'IF'
 
 });
