@@ -57,7 +57,8 @@ html {
 body {
   width: 100%;
   height: 100%;
-  background-color: skyblue;
+  /*background-color: #94DBCE;*/
+  background: linear-gradient(90deg, #8CD99A 10%, #D6CF85 100%);
 }
 
 /**********DYNAMIC********************/
