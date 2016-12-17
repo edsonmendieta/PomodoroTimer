@@ -1,4 +1,6 @@
 // GLOBALS ------------------------------------------
+var bird = new Audio('hummingbird.mp3');
+
 var minus1 = document.getElementById('minus1');
 
 var breakNum = document.getElementById('breakNum');
@@ -207,6 +209,8 @@ function secDown() {
 
                 breakSwitch = 'yes';
 
+                bird.play();
+
                 setTimeout(secDown, 1000);
             }
         } // ends 'CLOCK-WORKING' 0's
@@ -234,6 +238,8 @@ function secDown() {
             workNum.className = 'active';
 
             workSwitch = 'yes';
+
+            bird.play();
 
             setTimeout(secDown, 1000);
         } // ENDS 'CLOCK-BREAK' 0's
