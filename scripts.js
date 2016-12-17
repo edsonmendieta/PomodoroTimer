@@ -56,6 +56,8 @@ function secDown() {
 
         if (hours > 0 && breakSwitch == 'yes') {
 
+            console.log('BREAKSwitch-dependent-executed');
+
             var hourText = document.createTextNode(hours);
             part0.appendChild(hourText);
 
@@ -65,13 +67,25 @@ function secDown() {
             breakSwitch = 'no';
         }
 
+        else if (hours === 0 && breakSwitch == 'yes') {
+
+            breakSwitch = 'no';
+        }
+
         if (hours > 0 && workSwitch == 'yes') {
+
+            console.log('WORKSwitch-dependent-executed');
 
             var hourText = document.createTextNode(hours);
             part0.appendChild(hourText);
 
             var colText0 = document.createTextNode(':');
             colon0.appendChild(colText0);
+
+            workSwitch = 'no';
+        }
+
+        else if (hours === 0 && workSwitch == 'yes') {
 
             workSwitch = 'no';
         }
@@ -261,6 +275,8 @@ clock.addEventListener('click', function(){
 
             var colText0 = document.createTextNode(':');
             colon0.appendChild(colText0);
+
+            console.log('COLON' + ' ' + '0' + ' ' + 'APPENDED!');
         }
 
         console.log('clock-tick:' + hours);
